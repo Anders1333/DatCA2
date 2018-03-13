@@ -5,6 +5,7 @@
  */
 package Resource;
 
+import Facades.PersonFacade;
 import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -13,6 +14,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -20,7 +22,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author AndersHC
  */
-@Path("Data")
+@Path("data")
 public class DatCA2Resource {
      Gson gson = new Gson();
     @Context
@@ -36,11 +38,12 @@ public class DatCA2Resource {
      * Retrieves representation of an instance of Entities.DatCA2Resource
      * @return an instance of java.lang.String
      */
+    @Path("persons/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
+    public String getJson(@PathParam("id") Integer id) {
         //TODO return proper representation object
-       return gson.toJson("hej");
+       return gson.toJson(PersonFacade.getPersonFromId(id));
     }
 
     /**
@@ -51,4 +54,6 @@ public class DatCA2Resource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
+    
 }
