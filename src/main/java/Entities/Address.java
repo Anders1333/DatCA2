@@ -32,6 +32,7 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")
     , @NamedQuery(name = "Address.findByNumber", query = "SELECT a FROM Address a WHERE a.number = :number")
     , @NamedQuery(name = "Address.findByFloor", query = "SELECT a FROM Address a WHERE a.floor = :floor")})
+    , @NamedQuery(name = "Address.findByZipCode", query = "SELECT a FROM Address a WHERE a.floor = :floor")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
