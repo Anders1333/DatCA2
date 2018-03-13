@@ -28,6 +28,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "CityInfo.findAll", query = "SELECT c FROM CityInfo c")
     , @NamedQuery(name = "CityInfo.findByZipCode", query = "SELECT c FROM CityInfo c WHERE c.zipCode = :zipCode")
+    , @NamedQuery(name = "CityInfo.findZipCodes", query = "SELECT c.zipCode FROM CityInfo c")
     , @NamedQuery(name = "CityInfo.findByCity", query = "SELECT c FROM CityInfo c WHERE c.city = :city")})
 public class CityInfo implements Serializable {
 

@@ -5,8 +5,10 @@
  */
 package Resource;
 
-import Facades.PersonFacade;
+import Entities.CityInfo;
+import Facades.CityInfoFacade;
 import com.google.gson.Gson;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -22,9 +24,10 @@ import javax.ws.rs.core.MediaType;
  *
  * @author AndersHC
  */
-@Path("data")
+@Path("Data")
 public class DatCA2Resource {
-     Gson gson = new Gson();
+
+    Gson gson = new Gson();
     @Context
     private UriInfo context;
 
@@ -36,24 +39,32 @@ public class DatCA2Resource {
 
     /**
      * Retrieves representation of an instance of Entities.DatCA2Resource
+     *
      * @return an instance of java.lang.String
      */
-    @Path("persons/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("id") Integer id) {
+    public String getJson() {
         //TODO return proper representation object
-       return gson.toJson(PersonFacade.getPersonFromId(id));
+        return gson.toJson("hej");
+    }
+    
+    @Path("zipCodes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllZipCodes() {
+        List<CityInfo> zipCodes = CityInfoFacade.getAllZips();
+
+        return gson.toJson(zipCodes);
     }
 
     /**
      * PUT method for updating or creating an instance of DatCA2Resource
+     *
      * @param content representation for the resource
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-    
-    
 }
