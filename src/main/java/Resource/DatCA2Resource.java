@@ -5,6 +5,7 @@
  */
 package Resource;
 
+import Facades.PersonFacade;
 import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -39,9 +40,9 @@ public class DatCA2Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
-        //TODO return proper representation object
-       return gson.toJson("hej");
+        return null;
     }
+    
 
     /**
      * PUT method for updating or creating an instance of DatCA2Resource
