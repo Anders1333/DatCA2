@@ -6,7 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,6 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "CityInfo.findAll", query = "SELECT c FROM CityInfo c")
     , @NamedQuery(name = "CityInfo.findByZipCode", query = "SELECT c FROM CityInfo c WHERE c.zipCode = :zipCode")
-    , @NamedQuery(name = "CityInfo.findZipCodes", query = "SELECT c.zipCode FROM CityInfo c")
     , @NamedQuery(name = "CityInfo.findByCity", query = "SELECT c FROM CityInfo c WHERE c.city = :city")})
 public class CityInfo implements Serializable {
 
@@ -41,8 +40,8 @@ public class CityInfo implements Serializable {
     @Size(max = 45)
     @Column(name = "city")
     private String city;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityInfo")
-    private Collection<Address> addressCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "zipCode")
+    private List<Address> addressList;
 
     public CityInfo() {
     }
@@ -67,12 +66,12 @@ public class CityInfo implements Serializable {
         this.city = city;
     }
 
-    public Collection<Address> getAddressCollection() {
-        return addressCollection;
+    public List<Address> getAddressList() {
+        return addressList;
     }
 
-    public void setAddressCollection(Collection<Address> addressCollection) {
-        this.addressCollection = addressCollection;
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
     }
 
     @Override

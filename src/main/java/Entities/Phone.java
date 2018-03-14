@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -32,33 +33,34 @@ public class Phone implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "number")
-    private Integer number;
+    private String number;
     @JoinColumn(name = "Person_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Person person;
+    private Person personid;
 
     public Phone() {
     }
 
-    public Phone(Integer number) {
+    public Phone(String number) {
         this.number = number;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getPersonid() {
+        return personid;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersonid(Person personid) {
+        this.personid = personid;
     }
 
     @Override

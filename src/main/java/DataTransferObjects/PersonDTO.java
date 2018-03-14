@@ -41,13 +41,13 @@ public class PersonDTO implements JsonMessage<Person> {
 
         
         
-        Stream<Hobby> hobbyEntities = entity.getHobbyCollection().stream();
-        Stream<Integer> hobbyIds = hobbyEntities.map(c -> c.getHobbyId());
-        this.hobbyIds = hobbyIds.collect(Collectors.toList());
-
-        Stream<Phone> phoneEntities = entity.getPhoneCollection().stream();
-        Stream<Integer> phoneIds = phoneEntities.map(p -> p.getNumber());
-        this.phoneIds = phoneIds.collect(Collectors.toList());
+//        Stream<Hobby> hobbyEntities = entity.getHobbyCollection().stream();
+//        Stream<Integer> hobbyIds = hobbyEntities.map(c -> c.getHobbyId());
+//        this.hobbyIds = hobbyIds.collect(Collectors.toList());
+//
+//        Stream<Phone> phoneEntities = entity.getPhoneCollection().stream();
+//        Stream<Integer> phoneIds = phoneEntities.map(p -> p.getNumber());
+//        this.phoneIds = phoneIds.collect(Collectors.toList());
     }
 
     @Override
@@ -61,7 +61,8 @@ public class PersonDTO implements JsonMessage<Person> {
             phoneNumbers.add(PhoneFacade.getPhoneByPersonId(id));
         }
        
-        return new Person(firstName, lastName, email, hobbies, phoneNumbers,address);
+       // return new Person(firstName, lastName, email, hobbies, phoneNumbers,address);
+       return null;
     }
 
 }

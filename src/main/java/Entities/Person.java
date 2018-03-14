@@ -6,7 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,13 +60,13 @@ public class Person implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
-    @ManyToMany(mappedBy = "personCollection")
-    private Collection<Hobby> hobbyCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
-    private Collection<Phone> phoneCollection;
-    @JoinColumn(name = "Address_street", referencedColumnName = "street")
+    @ManyToMany(mappedBy = "personList")
+    private List<Hobby> hobbyList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personid")
+    private List<Phone> phoneList;
+    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     @ManyToOne(optional = false)
-    private Address address;
+    private Address addressId;
 
     public Person() {
     }
@@ -74,19 +74,13 @@ public class Person implements Serializable {
     public Person(Integer id) {
         this.id = id;
     }
-    
-  
 
-    public Person(String firstName, String lastName, String email, Collection<Hobby> hobbyCollection, Collection<Phone> phoneCollection, Address address) {
+    public Person(Integer id, String firstName, String lastName, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.hobbyCollection = hobbyCollection;
-        this.phoneCollection = phoneCollection;
-        this.address = address;
     }
-
-    
 
     public Integer getId() {
         return id;
@@ -120,28 +114,28 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public Collection<Hobby> getHobbyCollection() {
-        return hobbyCollection;
+    public List<Hobby> getHobbyList() {
+        return hobbyList;
     }
 
-    public void setHobbyCollection(Collection<Hobby> hobbyCollection) {
-        this.hobbyCollection = hobbyCollection;
+    public void setHobbyList(List<Hobby> hobbyList) {
+        this.hobbyList = hobbyList;
     }
 
-    public Collection<Phone> getPhoneCollection() {
-        return phoneCollection;
+    public List<Phone> getPhoneList() {
+        return phoneList;
     }
 
-    public void setPhoneCollection(Collection<Phone> phoneCollection) {
-        this.phoneCollection = phoneCollection;
+    public void setPhoneList(List<Phone> phoneList) {
+        this.phoneList = phoneList;
     }
 
-    public Address getAddress() {
-        return address;
+    public Address getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
     }
 
     @Override

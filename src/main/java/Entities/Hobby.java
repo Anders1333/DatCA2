@@ -6,8 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.stream.Stream;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,8 +31,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Hobby.findAll", query = "SELECT h FROM Hobby h")
     , @NamedQuery(name = "Hobby.findByHobbyId", query = "SELECT h FROM Hobby h WHERE h.hobbyId = :hobbyId")
-    , @NamedQuery(name = "Hobby.findByHobbyName", query = "SELECT h FROM Hobby h WHERE h.hobbyName = :hobbyName")
-    , @NamedQuery(name = "Hobby.findByDescription", query = "SELECT h FROM Hobby h WHERE h.description = :description")})
+    , @NamedQuery(name = "Hobby.findByHobbyName", query = "SELECT h FROM Hobby h WHERE h.hobbyName = :hobbyName")})
 public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,14 +45,11 @@ public class Hobby implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "hobbyName")
     private String hobbyName;
-    @Size(max = 45)
-    @Column(name = "description")
-    private String description;
     @JoinTable(name = "Person_has_Hobby", joinColumns = {
-        @JoinColumn(name = "Hobby_hobbyId", referencedColumnName = "hobbyId")}, inverseJoinColumns = {
+        @JoinColumn(name = "Hobby_id", referencedColumnName = "hobbyId")}, inverseJoinColumns = {
         @JoinColumn(name = "Person_id", referencedColumnName = "id")})
     @ManyToMany
-    private Collection<Person> personCollection;
+    private List<Person> personList;
 
     public Hobby() {
     }
@@ -84,20 +79,12 @@ public class Hobby implements Serializable {
         this.hobbyName = hobbyName;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Person> getPersonList() {
+        return personList;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
-    }
-
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 
     @Override
@@ -123,10 +110,6 @@ public class Hobby implements Serializable {
     @Override
     public String toString() {
         return "Entities.Hobby[ hobbyId=" + hobbyId + " ]";
-    }
-
-    public Stream<Integer> id() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

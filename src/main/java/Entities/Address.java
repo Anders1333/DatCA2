@@ -6,7 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,42 +29,44 @@ import javax.validation.constraints.Size;
 @Table(name = "Address")
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
+    , @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId")
     , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")
     , @NamedQuery(name = "Address.findByNumber", query = "SELECT a FROM Address a WHERE a.number = :number")
-    , @NamedQuery(name = "Address.findByFloor", query = "SELECT a FROM Address a WHERE a.floor = :floor")
-    , @NamedQuery(name = "Address.findByZipCode", query = "SELECT a FROM Address a WHERE a.floor = :floor")})
+    , @NamedQuery(name = "Address.findByFloor", query = "SELECT a FROM Address a WHERE a.floor = :floor")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Column(name = "addressId")
+    private Integer addressId;
+    @Size(max = 45)
     @Column(name = "street")
     private String street;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "number")
-    private String number;
+    private Integer number;
     @Column(name = "floor")
     private Integer floor;
-    @JoinColumn(name = "CityInfo_zipCode", referencedColumnName = "zipCode")
+    @JoinColumn(name = "zipCode", referencedColumnName = "zipCode")
     @ManyToOne(optional = false)
-    private CityInfo cityInfo = new CityInfo(2800);
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
-    private Collection<Person> personCollection;
+    private CityInfo zipCode;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
+    private List<Person> personList;
 
     public Address() {
     }
 
-    public Address(String street) {
-        this.street = street;
+    public Address(Integer addressId) {
+        this.addressId = addressId;
     }
 
-    public Address(String street, String number) {
-        this.street = street;
-        this.number = number;
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public String getStreet() {
@@ -75,11 +77,11 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -91,26 +93,26 @@ public class Address implements Serializable {
         this.floor = floor;
     }
 
-    public CityInfo getCityInfo() {
-        return cityInfo;
+    public CityInfo getZipCode() {
+        return zipCode;
     }
 
-    public void setCityInfo(CityInfo cityInfo) {
-        this.cityInfo = cityInfo;
+    public void setZipCode(CityInfo zipCode) {
+        this.zipCode = zipCode;
     }
 
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
+    public List<Person> getPersonList() {
+        return personList;
     }
 
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (street != null ? street.hashCode() : 0);
+        hash += (addressId != null ? addressId.hashCode() : 0);
         return hash;
     }
 
@@ -121,7 +123,7 @@ public class Address implements Serializable {
             return false;
         }
         Address other = (Address) object;
-        if ((this.street == null && other.street != null) || (this.street != null && !this.street.equals(other.street))) {
+        if ((this.addressId == null && other.addressId != null) || (this.addressId != null && !this.addressId.equals(other.addressId))) {
             return false;
         }
         return true;
@@ -129,7 +131,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Address[ street=" + street + " ]";
+        return "Entities.Address[ addressId=" + addressId + " ]";
     }
     
 }

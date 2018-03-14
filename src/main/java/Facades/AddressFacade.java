@@ -7,7 +7,7 @@ package Facades;
 
 import Entities.Address;
 import Entities.Person;
-import static Entities.Person_.address;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,10 +25,7 @@ public class AddressFacade {
 
     public static String getAddressFromPerson(Person p) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Address.findByStreet");
-        q.setParameter("street", p.getAddress().getStreet());
-        String address = (String) q.getSingleResult();
-        return address;
+     return null;
     }
 
     public static List<Address> getAllAddress() {

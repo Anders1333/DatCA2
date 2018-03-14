@@ -66,10 +66,7 @@ public class PersonFacade {
     public static void createPerson(Person p) {
         EntityManager em = emf.createEntityManager();
         
-        em.getTransaction().begin();
-        em.persist(p.getAddress());
-        em.persist(p);
-        em.getTransaction().commit();
+       
     }
 
     public static int getNumberOfPersonWithHobby(String hobby) {
