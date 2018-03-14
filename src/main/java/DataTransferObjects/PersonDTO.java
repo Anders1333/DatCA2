@@ -9,6 +9,7 @@ import Entities.Address;
 import Entities.Hobby;
 import Entities.Person;
 import Entities.Phone;
+import Facades.AddressFacade;
 import Facades.HobbyFacade;
 import Facades.PhoneFacade;
 import java.util.ArrayList;
@@ -32,10 +33,14 @@ public class PersonDTO implements JsonMessage<Person> {
     public Address address;
 
     public PersonDTO(Person entity) {
+        this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
+       
 
+        
+        
         Stream<Hobby> hobbyEntities = entity.getHobbyCollection().stream();
         Stream<Integer> hobbyIds = hobbyEntities.map(c -> c.getHobbyId());
         this.hobbyIds = hobbyIds.collect(Collectors.toList());
@@ -55,7 +60,8 @@ public class PersonDTO implements JsonMessage<Person> {
         for (int id : phoneIds) {
             phoneNumbers.add(PhoneFacade.getPhoneByPersonId(id));
         }
-        return new Person(firstName, lastName, email, hobbies, phoneNumbers, address);
+       
+        return new Person(firstName, lastName, email, hobbies, phoneNumbers,address);
     }
 
 }

@@ -5,9 +5,14 @@
  */
 package Resource;
 
+import DataTransferObjects.JsonMessage;
+import DataTransferObjects.PersonDTO;
 import Entities.CityInfo;
+import Entities.Person;
 import Facades.CityInfoFacade;
+import Facades.PersonFacade;
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -48,6 +53,30 @@ public class DatCA2Resource {
         //TODO return proper representation object
         return gson.toJson("hej");
     }
+    
+    @Path("persons")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllPersons(){
+          ArrayList<JsonMessage> messages = new ArrayList<>();
+        for(Person p : PersonFacade.getAllPersons()){
+            messages.add(new PersonDTO(p));
+        }
+        return gson.toJson(messages);
+    }
+    
+    @Path("persons/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonFromId(@PathParam("id") Integer id){
+         ArrayList<JsonMessage> messages = new ArrayList<>();
+         Person p = PersonFacade.getPersonFromId(id);
+         messages.add(new PersonDTO(p));
+         return gson.toJson(messages);
+    }
+        
+    
+    
     
     @Path("zipCodes")
     @GET

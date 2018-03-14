@@ -51,7 +51,7 @@ public class Address implements Serializable {
     private Integer floor;
     @JoinColumn(name = "CityInfo_zipCode", referencedColumnName = "zipCode")
     @ManyToOne(optional = false)
-    private CityInfo cityInfo;
+    private CityInfo cityInfo = new CityInfo(2800);
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     private Collection<Person> personCollection;
 

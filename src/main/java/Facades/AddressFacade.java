@@ -23,9 +23,12 @@ public class AddressFacade {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
 
-    public static Address getAddress(int id) {
+    public static String getAddressFromPerson(Person p) {
         EntityManager em = emf.createEntityManager();
-        return em.find(Address.class, id);
+        Query q = em.createNamedQuery("Address.findByStreet");
+        q.setParameter("street", p.getAddress().getStreet());
+        String address = (String) q.getSingleResult();
+        return address;
     }
 
     public static List<Address> getAllAddress() {
