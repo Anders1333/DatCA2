@@ -19,7 +19,7 @@ import javax.persistence.Query;
 public class PhoneFacade {
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
 
-    public static List<Phone> getAllPhoneNumbers(int id) {
+    public static List<Phone> getAllPhoneNumbers() {
         EntityManager em = emf.createEntityManager();
         Query query = em.createNamedQuery("Phone.findAll");
         List<Phone> allPhoneNums = query.getResultList();
@@ -27,10 +27,12 @@ public class PhoneFacade {
     }
     
     
-    public static Phone getPhoneByNumber(int id) {
+    public static Phone getPhoneByPersonId(int id) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createNamedQuery("Phone.findByNumber");
-        Phone p = (Phone) query.getSingleResult();
-        return p;
+        Query q = em.createQuery("SELECT p.number FROM Phone p WHERE p.Person_Id = : id");
+        q.setParameter("id", id);
+        Phone phoneToReturn = (Phone) q.getSingleResult();
+        return phoneToReturn;
     }
 }
+  

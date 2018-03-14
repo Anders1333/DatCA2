@@ -7,6 +7,7 @@ package Entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.stream.Stream;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -122,6 +123,10 @@ public class Hobby implements Serializable {
     @Override
     public String toString() {
         return "Entities.Hobby[ hobbyId=" + hobbyId + " ]";
+    }
+
+    public Stream<Integer> id() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
