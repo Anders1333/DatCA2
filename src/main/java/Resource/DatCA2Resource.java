@@ -57,6 +57,27 @@ public class DatCA2Resource {
 
         return gson.toJson(zipCodes);
     }
+    
+    @Path("allCitys")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllCitys() {
+        List<CityInfo> citys = CityInfoFacade.getAllCitys();
+
+        return gson.toJson(citys);
+    }
+    
+    @Path("getCity")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCitysWithZip(@PathParam ("getCity") Integer zipCode) {
+        CityInfo citys = CityInfoFacade.getCityFromZip(zipCode);
+
+        return gson.toJson(citys);
+    }
+    
+    
+    
 
     /**
      * PUT method for updating or creating an instance of DatCA2Resource

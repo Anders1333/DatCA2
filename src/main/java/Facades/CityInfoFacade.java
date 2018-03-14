@@ -19,12 +19,29 @@ import javax.persistence.Query;
 public class CityInfoFacade {
     
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
+    
+    
     public static List<CityInfo> getAllZips(){
         EntityManager em = emf.createEntityManager();
         Query query = em.createNamedQuery("CityInfo.findZipCodes");
         List<CityInfo> zipCodes = query.getResultList();
         
         return zipCodes;
+    }
+    
+    public static List<CityInfo> getAllCitys(){
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createNamedQuery("CityInfo.findAll");
+        List<CityInfo> citys = query.getResultList();
+        
+        return citys;
+    }
+    
+    public static CityInfo getCityFromZip(int zipCode){
+    EntityManager em = emf.createEntityManager();
+       Query q = em.createNamedQuery("CityInfo.findByZipCode");
+       q.setParameter("zipCode", zipCode);
+       return (CityInfo) q.getSingleResult(); 
     }
     
     
