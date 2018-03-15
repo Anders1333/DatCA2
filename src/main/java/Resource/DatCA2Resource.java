@@ -69,10 +69,10 @@ public class DatCA2Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersonFromId(@PathParam("id") Integer id){
-         ArrayList<JsonMessage> messages = new ArrayList<>();
+       
          Person p = PersonFacade.getPersonFromId(id);
-         messages.add(new PersonDTO(p));
-         return gson.toJson(messages);
+         PersonDTO pd = new PersonDTO(p);
+         return gson.toJson(pd);
     }
         
     

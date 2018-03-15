@@ -37,8 +37,8 @@ public class PersonDTO implements JsonMessage<Person> {
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
-       
-
+        
+    }
         
         
 //        Stream<Hobby> hobbyEntities = entity.getHobbyCollection().stream();
@@ -48,7 +48,7 @@ public class PersonDTO implements JsonMessage<Person> {
 //        Stream<Phone> phoneEntities = entity.getPhoneCollection().stream();
 //        Stream<Integer> phoneIds = phoneEntities.map(p -> p.getNumber());
 //        this.phoneIds = phoneIds.collect(Collectors.toList());
-    }
+    
 
     @Override
     public Person toInternal() {

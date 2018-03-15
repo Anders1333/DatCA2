@@ -5,10 +5,29 @@
  */
 package DataTransferObjects;
 
+import Entities.Phone;
+
 /**
  *
  * @author AndersHC
  */
-public class PhoneDTO {
+public class PhoneDTO implements JsonMessage<Phone> {
+
+    String number;
+
+    public PhoneDTO(Phone p) {
+        this.number = p.getNumber();
+    }
+    
+    
+    
+    
+    
+    
+    
+    @Override
+    public Phone toInternal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
