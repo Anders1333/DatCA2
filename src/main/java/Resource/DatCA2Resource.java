@@ -156,6 +156,19 @@ public class DatCA2Resource {
         }
         return gson.toJson(messages);
     }
+   
+    @Path("hobbies/{hobbyName}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonsFromHobby (@PathParam("hobbyName") String hobbyName) {
+        List<Person> persons = PersonFacade.getPersonsFromHobby(hobbyName);
+        ArrayList<JsonMessage> messages = new ArrayList<>();
+           for (int i = 0; i < persons.size(); i++) {
+            messages.add(new PersonDTO(persons.get(i)));
+        }
+        return gson.toJson(messages);
+    }
+    
     
    //------------------------------- GET END ----------------------------------//
     

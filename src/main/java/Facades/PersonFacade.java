@@ -98,4 +98,18 @@ public class PersonFacade {
         List<Person> returnList = x.getResultList();
         return returnList;
     }
+
+    public static List<Person> getPersonsFromHobby(String hobbyName) {
+     
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT h.hobbyId FROM Hobby h WHERE h.hobbyName =:hobbyName");
+        q.setParameter("hobbyName", hobbyName);
+        int hobbyId = (Integer) q.getSingleResult();
+      
+        Query x = em.createQuery("SELECT p FROM Person p LEFT JOIN p.hobbyList g WHERE g.hobbyId =:hobbyId");
+        x.setParameter("hobbyId", hobbyId);
+        List<Person> returnList = x.getResultList();
+        return returnList;
+    }
+    
 }

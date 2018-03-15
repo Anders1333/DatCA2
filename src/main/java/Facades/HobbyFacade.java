@@ -35,7 +35,8 @@ public class HobbyFacade {
         Query q = em.createNamedQuery("Hobby.findAll");
        return (List) q.getResultList();
     
-        
+
+
     }
     
 }
