@@ -89,11 +89,11 @@ public class PersonFacade {
 
     public static List<Person> getPersonsFromCity(String cityName) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT c.zipCode FROM CityInfo c WHERE c.city = : city");
-        q.setParameter("city", cityName);
+        Query q = em.createQuery("SELECT c.zipCode FROM CityInfo c WHERE c.city =:cityName");
+        q.setParameter("cityName", cityName);
         int zipCode = (Integer) q.getSingleResult();
         // We now have the zipcode. We must get all persons with an address in the zipCode
-        Query x = em.createQuery("SELECT p FROM Person p WHERE p.address.cityInfo.zipCode = : zipCode");
+        Query x = em.createQuery("SELECT p FROM Person p WHERE p.addressId.zipCode.zipCode =:zipCode");
         x.setParameter("zipCode", zipCode);
         List<Person> returnList = x.getResultList();
         return returnList;

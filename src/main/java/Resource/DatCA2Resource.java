@@ -5,12 +5,19 @@
  */
 package Resource;
 
+import DataTransferObjects.AddressDTO;
+import DataTransferObjects.CityInfoDTO;
 import DataTransferObjects.JsonMessage;
 import DataTransferObjects.PersonDTO;
+import DataTransferObjects.PhoneDTO;
+import Entities.Address;
 import Entities.CityInfo;
 import Entities.Person;
+import Entities.Phone;
+import Facades.AddressFacade;
 import Facades.CityInfoFacade;
 import Facades.PersonFacade;
+import Facades.PhoneFacade;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,72 +49,104 @@ public class DatCA2Resource {
     public DatCA2Resource() {
     }
 
-    /**
-     * Retrieves representation of an instance of Entities.DatCA2Resource
-     *
-     * @return an instance of java.lang.String
-     */
+    //------------------------------  GET  ---------------------------------//
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
         //TODO return proper representation object
         return gson.toJson("hej");
     }
-    
+
     @Path("persons")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllPersons(){
-          ArrayList<JsonMessage> messages = new ArrayList<>();
-        for(Person p : PersonFacade.getAllPersons()){
-            messages.add(new PersonDTO(p));
+    public String getAllPersons() {
+        ArrayList<JsonMessage> messages = new ArrayList<>();
+        List<Person> persons = PersonFacade.getAllPersons();
+        for (int i = 0; i < persons.size(); i++) {
+            messages.add(new PersonDTO(persons.get(i)));
         }
         return gson.toJson(messages);
     }
-    
+
     @Path("persons/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonFromId(@PathParam("id") Integer id){
-       
-         Person p = PersonFacade.getPersonFromId(id);
-         PersonDTO pd = new PersonDTO(p);
-         return gson.toJson(pd);
-    }
-        
-    
-    
-    
-    @Path("zipCodes")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getAllZipCodes() {
-        List<CityInfo> zipCodes = CityInfoFacade.getAllZips();
+    public String getPersonFromId(@PathParam("id") Integer id) {
 
-        return gson.toJson(zipCodes);
+        Person p = PersonFacade.getPersonFromId(id);
+        PersonDTO pd = new PersonDTO(p);
+        return gson.toJson(pd);
     }
-    
-    @Path("allCitys")
+
+    @Path("cities")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllCitys() {
         List<CityInfo> citys = CityInfoFacade.getAllCitys();
+        ArrayList<JsonMessage> messages = new ArrayList<>();
 
-        return gson.toJson(citys);
+        for (int i = 0; i < citys.size(); i++) {
+            messages.add(new CityInfoDTO(citys.get(i)));
+        }
+        return gson.toJson(messages);
+
     }
-    
-    @Path("getCity")
+
+    @Path("cities/{zip}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCitysWithZip(@PathParam ("getCity") Integer zipCode) {
-        CityInfo citys = CityInfoFacade.getCityFromZip(zipCode);
+    public String getCityFromZip(@PathParam("zip") Integer zipCode) {
+        CityInfo city = CityInfoFacade.getCityFromZip(zipCode);
+        CityInfoDTO cityData = new CityInfoDTO(city);
+        return gson.toJson(cityData);
+    }
 
-        return gson.toJson(citys);
+    @Path("phonenumbers")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllNumbers() {
+        List<Phone> phones = PhoneFacade.getAllPhoneNumbers();
+        ArrayList<JsonMessage> messages = new ArrayList<>();
+
+        for (int i = 0; i < phones.size(); i++) {
+            messages.add(new PhoneDTO(phones.get(i)));
+        }
+        return gson.toJson(messages);
+
     }
     
     
-    
+    @Path("addresses")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllAddresses(){
+       List<Address> addresses = AddressFacade.getAllAddress();
+       ArrayList<JsonMessage> messages = new ArrayList<>();
+       
+        for (int i = 0; i < addresses.size(); i++) {
+            messages.add(new AddressDTO(addresses.get(i),addresses.get(i).getZipCode()));
+        }
+        return gson.toJson(messages);
+    }
 
+    @Path("persons/whoLivesIn/{cityName}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonsFromZip (@PathParam("cityName") String city) {
+        List<Person> persons = PersonFacade.getPersonsFromCity(city);
+        ArrayList<JsonMessage> messages = new ArrayList<>();
+           for (int i = 0; i < persons.size(); i++) {
+            messages.add(new PersonDTO(persons.get(i)));
+        }
+        return gson.toJson(messages);
+    }
+    
+   //------------------------------- GET END ----------------------------------//
+    
+    
+    
+    
     /**
      * PUT method for updating or creating an instance of DatCA2Resource
      *
