@@ -7,15 +7,18 @@ package Resource;
 
 import DataTransferObjects.AddressDTO;
 import DataTransferObjects.CityInfoDTO;
+import DataTransferObjects.HobbyDTO;
 import DataTransferObjects.JsonMessage;
 import DataTransferObjects.PersonDTO;
 import DataTransferObjects.PhoneDTO;
 import Entities.Address;
 import Entities.CityInfo;
+import Entities.Hobby;
 import Entities.Person;
 import Entities.Phone;
 import Facades.AddressFacade;
 import Facades.CityInfoFacade;
+import Facades.HobbyFacade;
 import Facades.PersonFacade;
 import Facades.PhoneFacade;
 import com.google.gson.Gson;
@@ -138,6 +141,18 @@ public class DatCA2Resource {
         ArrayList<JsonMessage> messages = new ArrayList<>();
            for (int i = 0; i < persons.size(); i++) {
             messages.add(new PersonDTO(persons.get(i)));
+        }
+        return gson.toJson(messages);
+    }
+    
+    @Path("hobbies")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllHobbies(){
+        List<Hobby> hobbies = HobbyFacade.getAllHobbies();
+        ArrayList<JsonMessage> messages = new ArrayList<>();
+        for (int i = 0; i < hobbies.size(); i++) {
+            messages.add(new HobbyDTO(hobbies.get(i)));
         }
         return gson.toJson(messages);
     }
