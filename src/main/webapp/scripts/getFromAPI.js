@@ -54,7 +54,9 @@ function deleteUserById() {
 
 
     fetch("http://localhost:8084/DatCA2/API/Data/persons/" + id, settings)
-            .then(res => res.json());
+            .then(res => res.json())
+            .then(data => document.getElementById("userDeleteOutput").innerHTML = data
+            );
 }
 ;
 
