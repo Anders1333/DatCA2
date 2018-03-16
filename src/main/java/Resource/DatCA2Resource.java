@@ -96,10 +96,10 @@ public class DatCA2Resource {
         return gson.toJson(citys);
     }
     
-    @Path("getCity")
+    @Path("getCity/{zipCode }")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCitysWithZip(@PathParam ("getCity") Integer zipCode) {
+    public String getCitysWithZip(@PathParam ("zipCode") Integer zipCode) {
         CityInfo citys = CityInfoFacade.getCityFromZip(zipCode);
 
         return gson.toJson(citys);

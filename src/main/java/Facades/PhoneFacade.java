@@ -17,7 +17,9 @@ import javax.persistence.Query;
  * @author AndersHC
  */
 public class PhoneFacade {
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
+    //static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
+    // this one is for test
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_TEST");
 
     public static List<Phone> getAllPhoneNumbers() {
         EntityManager em = emf.createEntityManager();
