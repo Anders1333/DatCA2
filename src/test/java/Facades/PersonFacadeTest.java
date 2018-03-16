@@ -46,7 +46,9 @@ public class PersonFacadeTest {
 //                    + ", String " + person.get(i).getLastName() 
 //                    + ", String " + person.get(i).getEmail() 
 //                    + ");";
-            String sql = "INSERT INTO DataCA2Test.PersonTest ( addressId, firstName, lastName, email) VALUES (" + r.nextInt(20) + "," + "'" + person.get(i).getFirstName() + "', " + "'" + person.get(i).getLastName() + "'," + "'" + person.get(i).getEmail() + "');";
+            //String sql = "INSERT INTO DataCA2Test.PersonTest ( addressId, firstName, lastName, email) VALUES (" + r.nextInt(20) + "," + "'" + person.get(i).getFirstName() + "', " + "'" + person.get(i).getLastName() + "'," + "'" + person.get(i).getEmail() + "');";
+            // this is for the real database
+            String sql = "INSERT INTO DataCA2.Person ( addressId, firstName, lastName, email) VALUES (" + r.nextInt(20) + "," + "'" + person.get(i).getFirstName() + "', " + "'" + person.get(i).getLastName() + "'," + "'" + person.get(i).getEmail() + "');";
 
             //javax.persistence.Query q = em.createQuery(sql);
             System.out.println(sql);
@@ -66,7 +68,7 @@ public class PersonFacadeTest {
 
     public static List<Person> generateData() {
         String[] firstNames = {"Mathias", "Hans", "Emil", "Mikkel", "Tom", "Jerry", "Fred Flintstone", "HolgaFraPjort"};
-        String[] lastNames = {"HANSEN", "BIGLER", "POTTER", "VOLDEMORT", "WULFRIC", "BRIAN", "DUMbLEDORE", "WATSON"};
+        String[] lastNames = {"Jones", "Baggings", "POTTER", "VOLDEMORT", "WULFRIC", "BRIAN", "DUMbLEDORE", "WATSON"};
 
         int id = 0;
         List<Person> persons = new ArrayList<>();
@@ -84,6 +86,7 @@ public class PersonFacadeTest {
 
     @Before
     public void setUp() {
+        
 
     }
 
