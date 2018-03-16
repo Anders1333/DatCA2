@@ -9,6 +9,7 @@ import DataTransferObjects.AddressDTO;
 import DataTransferObjects.CityInfoDTO;
 import DataTransferObjects.HobbyDTO;
 import DataTransferObjects.JsonMessage;
+import DataTransferObjects.MessageFacade;
 import DataTransferObjects.PersonDTO;
 import DataTransferObjects.PhoneDTO;
 import Entities.Address;
@@ -24,11 +25,17 @@ import Facades.PhoneFacade;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import static javax.ws.rs.HttpMethod.POST;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -171,10 +178,21 @@ public class DatCA2Resource {
     
     
    //------------------------------- GET END ----------------------------------//
-    
-    
-    
-    
+   //------------------------------- DELETE -----------------------------------//
+    @Path("persons")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createNewPerson(String content) {
+        Person toCreate = MessageFacade.fromJson(content, PersonDTO.class);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(toCreate);
+        em.getTransaction().commit();
+        em.close();
+        // Address not in database
+        // entitymanager find
+    }
     /**
      * PUT method for updating or creating an instance of DatCA2Resource
      *
