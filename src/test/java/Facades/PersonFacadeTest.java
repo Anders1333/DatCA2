@@ -38,6 +38,7 @@ public class PersonFacadeTest {
         EntityManager em = emf.createEntityManager();
         Random r = new Random();
         for (int i = 0; i < person.size(); i++) {
+            String sql = "INSERT INTO DataCA2.Person ( addressId, firstName, lastName, email) VALUES (" + r.nextInt(20) + "," + "'" + person.get(i).getFirstName() + "', " + "'" + person.get(i).getLastName() + "'," + "'" + person.get(i).getEmail() + "');";
 
 //            String sql = "INSERT INTO PersonTest(id,addressId, firstName,lastName,email) VALUES(
 //                    + int " + person.get(i).getId() + "," 
@@ -48,7 +49,6 @@ public class PersonFacadeTest {
 //                    + ");";
             //String sql = "INSERT INTO DataCA2Test.PersonTest ( addressId, firstName, lastName, email) VALUES (" + r.nextInt(20) + "," + "'" + person.get(i).getFirstName() + "', " + "'" + person.get(i).getLastName() + "'," + "'" + person.get(i).getEmail() + "');";
             // this is for the real database
-            String sql = "INSERT INTO DataCA2.Person ( addressId, firstName, lastName, email) VALUES (" + r.nextInt(20) + "," + "'" + person.get(i).getFirstName() + "', " + "'" + person.get(i).getLastName() + "'," + "'" + person.get(i).getEmail() + "');";
 
             //javax.persistence.Query q = em.createQuery(sql);
             System.out.println(sql);
@@ -86,6 +86,9 @@ public class PersonFacadeTest {
 
     @Before
     public void setUp() {
+        System.out.println("start");
+        makeSQL(generateData());
+        System.out.println("slut");
         
 
     }
@@ -104,9 +107,6 @@ public class PersonFacadeTest {
 //        Person expResult = null;
 //        Person result = PersonFacade.getPersonFromId(id);
 //        assertEquals(expResult, result);
-        System.out.println("start");
-        makeSQL(generateData());
-        System.out.println("slut");
 
     }
 //
