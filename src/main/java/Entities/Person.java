@@ -65,7 +65,7 @@ public class Person implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personid")
     private List<Phone> phoneList;
     @JoinColumn(name = "addressId", referencedColumnName = "addressId")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.PERSIST)
     private Address addressId;
 
     public Person() {
@@ -81,6 +81,24 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.email = email;
     }
+
+    public Person(String firstName, String lastName, String email, List<Hobby> hobbyList, List<Phone> phoneList, Address addressId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbyList = hobbyList;
+        this.phoneList = phoneList;
+        this.addressId = addressId;
+    }
+
+    public Person(String firstName, String lastName, String email, List<Hobby> hobbyList, Address addressId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbyList = hobbyList;
+        this.addressId = addressId;
+    }
+    
 
     public Integer getId() {
         return id;

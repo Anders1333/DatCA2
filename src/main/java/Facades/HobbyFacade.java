@@ -24,7 +24,7 @@ public class HobbyFacade {
      
       public static Hobby getHobbyFromId(int id) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT h FROM Hobby h WHERE hobbyId = : id");
+        Query q = em.createQuery("SELECT h FROM Hobby h WHERE h.hobbyId =:id");
         q.setParameter("id", id);
          Hobby hobbyToReturn = (Hobby) q.getSingleResult();
         return hobbyToReturn;
