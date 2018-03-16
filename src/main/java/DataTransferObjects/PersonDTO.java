@@ -37,7 +37,7 @@ public class PersonDTO implements JsonMessage<Person> {
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
-        this.address = entity.getAddressId();
+     
     }
         
         
@@ -53,9 +53,10 @@ public class PersonDTO implements JsonMessage<Person> {
     @Override
     public Person toInternal() {
         ArrayList<Hobby> hobbies = new ArrayList<>();
-        for (int id : hobbyIds) {
-         hobbies.add(HobbyFacade.getHobbyFromId(id));
+        for (int i = 0; i < hobbyIds.size(); i++) {
+         hobbies.add(HobbyFacade.getHobbyFromId(hobbyIds.get(i)));
         }
+        
       
        
        return new Person(firstName, lastName, email, hobbies,address);

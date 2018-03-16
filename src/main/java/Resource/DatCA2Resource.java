@@ -178,7 +178,22 @@ public class DatCA2Resource {
     
     
    //------------------------------- GET END ----------------------------------//
-   //------------------------------- DELETE -----------------------------------//
+    
+   //------------------------------- DELETE -----------------------------------// 
+    
+    @Path("persons/{id}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String DeletePersonFromId(@PathParam("id") Integer id) {
+    String message = PersonFacade.removePersonFromId(id);
+    return gson.toJson(message);
+    }
+    
+    
+    
+    
+    
+   //------------------------------- POST -----------------------------------//
     @Path("persons")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

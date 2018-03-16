@@ -34,7 +34,7 @@ public class PersonFacadeTest {
     }
 
     public static void makeSQL(List<Person> person) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_TEST");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
         EntityManager em = emf.createEntityManager();
         Random r = new Random();
         for (int i = 0; i < person.size(); i++) {

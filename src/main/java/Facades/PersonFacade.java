@@ -86,5 +86,17 @@ public class PersonFacade {
         List<Person> returnList = x.getResultList();
         return returnList;
     }
+
+    public static String removePersonFromId(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        Person deleted = getPersonFromId(id);
+        Query q = em.createQuery("DELETE FROM Person p WHERE p.id =:id");
+        q.setParameter("id", id);
+        em.getTransaction().begin();
+        q.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+        return "Person has been removed from the database: " + deleted.getFirstName()+" "+deleted.getLastName()+ " using ID: " + deleted.getId();
+    }
     
 }
