@@ -86,9 +86,9 @@ public class PersonFacadeTest {
 
     @Before
     public void setUp() {
-        System.out.println("start");
+        //makes random users into sql
         makeSQL(generateData());
-        System.out.println("slut");
+        
         
 
     }
