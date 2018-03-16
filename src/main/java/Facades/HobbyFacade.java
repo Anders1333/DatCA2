@@ -8,6 +8,8 @@ package Facades;
 import Entities.Hobby;
 import Entities.Phone;
 import static Facades.PhoneFacade.emf;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,4 +29,14 @@ public class HobbyFacade {
          Hobby hobbyToReturn = (Hobby) q.getSingleResult();
         return hobbyToReturn;
     }
+
+    public static List<Hobby> getAllHobbies() {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Hobby.findAll");
+       return (List) q.getResultList();
+    
+
+
+    }
+    
 }

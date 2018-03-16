@@ -15,7 +15,7 @@ import Entities.CityInfo;
 public class AddressDTO implements JsonMessage<Address>  {
 
     
-    int id;
+   
     String street;
     int number;
     int floor;
