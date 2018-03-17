@@ -47,14 +47,12 @@ public class PersonFacade {
 
     public static Person getPersonFromPhone(int phonenumber) {
         EntityManager em = emf.createEntityManager();
-        
+
         Query q = em.createQuery("SELECT p.Person_id FROM Phone p WHERE p.number = : phonenumber");
         q.setParameter("phonenumber", phonenumber);
         int personId = (Integer) q.getSingleResult();
         return null;
     }
-
-
 
     public static int getNumberOfPersonWithHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
@@ -71,25 +69,31 @@ public class PersonFacade {
         return returnNumber;
     }
 
-    public static List<Person> getPersonsFromCity(String cityName) {
+    public static List<Person> getPersonsFromCity(String cityName) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT c.zipCode FROM CityInfo c WHERE c.city =:cityName");
         q.setParameter("cityName", cityName);
         int zipCode = (Integer) q.getSingleResult();
         // We now have the zipcode. We must get all persons with an address in the zipCode
+        if (zipCode == 0) {
+            throw new PersonNotFoundException("No city with that name");
+        }
+
         Query x = em.createQuery("SELECT p FROM Person p WHERE p.addressId.zipCode.zipCode =:zipCode");
         x.setParameter("zipCode", zipCode);
         List<Person> returnList = x.getResultList();
         return returnList;
     }
 
-    public static List<Person> getPersonsFromHobby(String hobbyName) {
+    public static List<Person> getPersonsFromHobby(String hobbyName) throws PersonNotFoundException {
 
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT h.hobbyId FROM Hobby h WHERE h.hobbyName =:hobbyName");
         q.setParameter("hobbyName", hobbyName);
         int hobbyId = (Integer) q.getSingleResult();
-
+        if (hobbyId == 0) {
+            throw new PersonNotFoundException(hobbyName + " does not excist");
+        }
         Query x = em.createQuery("SELECT p FROM Person p LEFT JOIN p.hobbyList g WHERE g.hobbyId =:hobbyId");
         x.setParameter("hobbyId", hobbyId);
         List<Person> returnList = x.getResultList();
@@ -105,7 +109,7 @@ public class PersonFacade {
         q.executeUpdate();
         em.getTransaction().commit();
         em.close();
-        return "Person has been removed from the database: " + deleted.getFirstName()+" "+deleted.getLastName()+ " using ID: " + deleted.getId();
+        return "Person has been removed from the database: " + deleted.getFirstName() + " " + deleted.getLastName() + " using ID: " + deleted.getId();
     }
-    
+
 }

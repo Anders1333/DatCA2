@@ -148,7 +148,7 @@ public class DatCA2Resource {
     @Path("persons/whoLivesIn/{cityName}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonsFromZip(@PathParam("cityName") String city) {
+    public String getPersonsFromZip(@PathParam("cityName") String city) throws PersonNotFoundException {
 
         List<Person> persons = PersonFacade.getPersonsFromCity(city);
         ArrayList<JsonMessage> messages = new ArrayList<>();
@@ -176,7 +176,7 @@ public class DatCA2Resource {
     @Path("hobbies/{hobbyName}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonsFromHobby(@PathParam("hobbyName") String hobbyName) {
+    public String getPersonsFromHobby(@PathParam("hobbyName") String hobbyName) throws PersonNotFoundException {
         List<Person> persons = PersonFacade.getPersonsFromHobby(hobbyName);
         ArrayList<JsonMessage> messages = new ArrayList<>();
         for (int i = 0; i < persons.size(); i++) {
