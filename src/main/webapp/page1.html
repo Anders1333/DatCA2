@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <!-- NavBar START -->
+        <nav class="navbar navbar-inverse" style="border-radius: 0px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">The Bois</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="active"><a href="page1.html">PAGE 1</a></li>
+                    <li><a href="page2.html">PAGE 2</a></li>
+                    <li><a href="page3.html">PAGE 3</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NavBar END -->
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4"> <!-- Left Col -->
+                    <div class="box">
+                        <label>List of all Addresses</label><br>
+                        <button id="getallAddresses" class="btn btn-default">Get All Addresses</button>
+                    </div>
+                    <div class="box" id="allAddressesDiv" style="display: none;">
+                        <div class="scrollableDiv">
+                            <ul class="list-group" id="addressesDataList"></ul>
+                            <div class="templates">
+                                <div id="addressesListItem">
+                                    <div class="row1">
+                                        <div class="listAddressesZip"></div>
+                                        <div class="listAddressesCity"></div>
+                                        <div class="listAddressesStreet"></div>
+                                        <div class="listAddressesNumber"></div>
+                                        <div class="listAddressesFloor"></div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                    <div class="box">
+                        <div class="form-group">
+                            <label>Get all users by city</label>
+                            <input type="text" value="albertslund" id="cityNameInput" class="form-control" placeholder="Write the name of a city to get a list of all users who live there.">
+                        </div>
+                        <button id="getallUsersByCity" class="btn btn-default">Get Users</button>
+                    </div>
+                    <div class="box" id="allUsersByCityDiv" style="display: none;">
+                        <div class="scrollableDiv">
+                            <ul class="list-group" id="allUsersByCityDataList"></ul>
+                            <div class="templates">
+                                <div id="allUsersByCityListItem">
+                                    <div class="row1">
+                                        <div class="listAllUsersByCityId"></div>
+                                        <div class="listAllUsersByCityFirstName"></div>
+                                        <div class="listAllUsersByCityLastName"></div>
+                                        <div class="listAllUsersByCityEmail"></div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4" style="word-wrap: break-word;">
+                    <div class="box">
+                        <label>List of all Hobbies</label><br>
+                        <button id="getallHobbies" class="btn btn-default">Get All Hobbies</button>
+                    </div>
+                    <div class="box" id="allHobbiesDiv" style="display: none;">
+                        <div class="scrollableDiv" style="max-height: 200px !important;">
+                            <ul class="list-group" id="allHobbiesDataList"></ul>
+                            <div class="templates">
+                                <div id="allHobbiesListItem">
+                                    <div class="row1">
+                                        <div class="listAllHobbiesName"></div>    
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+
+
+                    <div class="box">
+                        <div class="form-group">
+                            <label>Get all users by hobby</label>
+                            <input type="text" value="surfing" id="hobbyNameInput" class="form-control">
+                        </div>
+                        <button id="getallUsersByHobby" class="btn btn-default">Get Users</button>
+                    </div>
+                    <div class="box" id="allUsersByHobbyDiv" style="display: none;">
+                        <div class="scrollableDiv">
+                            <ul class="list-group" id="allUsersByHobbyDataList"></ul>
+                            <div class="templates">
+                                <div id="allUsersByHobbyListItem">
+                                    <div class="row1">
+                                        <div class="listAllUsersByHobbyId"></div>
+                                        <div class="listAllUsersByHobbyFirstName"></div>
+                                        <div class="listAllUsersByHobbyLastName"></div>
+                                        <div class="listAllUsersByHobbyEmail"></div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="scripts/getFromAPI_page1.js" type="text/javascript"></script>
+</html>

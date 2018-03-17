@@ -54,30 +54,7 @@ public class PersonFacade {
         return null;
     }
 
-//    public static List<Person> getPersonsFromHobby(String hobby) {
-//        EntityManager em = emf.createEntityManager();
-//        // First we get the hobby_id from the hobby name : 
-//        Query getHobby = em.createQuery("SELECT h.hobbyId FROM Hobby h WHERE h.hobbyName = : hobby");
-//        getHobby.setParameter("hobbyName", hobby);
-//        int hobbyId = (Integer) getHobby.getSingleResult();
-//        // Then we find the person_id from the Person_Has_Hobby list :
-//
-//        Query q = em.createQuery("SELECT p.Person_id FROM Person_has_Hobby p WHERE p.Hobby_hobbyId = : hobbyId");
-//        q.setParameter("hobbyId", hobbyId);
-//        List<Integer> personIdList = q.getResultList();
-//        // Now we create a list of persons from the Ids
-//        List<Person> returnList = new ArrayList<>();
-//        for (int i = 0; i < personIdList.size(); i++) {
-//            int personToFind = personIdList.get(i);
-//            
-//            returnList.add(personToAdd);
-//        }
-//        return returnList;
-//    }
-    public static void createPerson(Person p) {
-        EntityManager em = emf.createEntityManager();
 
-    }
 
     public static int getNumberOfPersonWithHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
@@ -119,4 +96,16 @@ public class PersonFacade {
         return returnList;
     }
 
+    public static String removePersonFromId(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        Person deleted = getPersonFromId(id);
+        Query q = em.createQuery("DELETE FROM Person p WHERE p.id =:id");
+        q.setParameter("id", id);
+        em.getTransaction().begin();
+        q.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+        return "Person has been removed from the database: " + deleted.getFirstName()+" "+deleted.getLastName()+ " using ID: " + deleted.getId();
+    }
+    
 }

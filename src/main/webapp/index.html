@@ -3,8 +3,137 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
     </head>
+
     <body>
-        <h1>Hello World!</h1>
+        <!-- NavBar START -->
+        <nav class="navbar navbar-inverse" style="border-radius: 0px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">The Bois</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html">HOME</a></li>
+                    <li><a href="page1.html">PAGE 1</a></li>
+                    <li><a href="page2.html">PAGE 2</a></li>
+                    <li><a href="page3.html">PAGE 3</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NavBar END -->
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4"> <!-- Left Col -->
+                    <!-- BOX 1 -->
+                    <div class="box">
+                        <h5>Get user by ID</h5>
+                        <div class="form-group">
+                            <label for="usr">ID:</label>
+                            <input type="number" value="1" id="idInput" class="form-control" min="1">
+                        </div>
+                        <button id="getUser" class="btn btn-default">Get User</button>
+                        <div id="userInfoOutput" style="margin-top: 10px;"></div>
+                    </div>
+
+                    <!-- BOX 2 -->
+                    <div class="box">
+                        <h5>Delete user by ID</h5>
+                        <div class="form-group">
+                            <label for="usr">ID:</label>
+                            <input type="number" value="1" id="idDeleteInput" class="form-control" min="1">
+                        </div>
+                        <button id="deleteUser" class="btn btn-default">Delete User</button>
+                        <div id="userDeleteOutput" style="margin-top: 10px;"></div>
+                    </div>
+                    
+                    
+                    
+                    <div class="box">
+                        <div class="form-group">
+                            <label>Get all Users</label>
+                        </div>
+                        <button id="getAllUsers" class="btn btn-default">Get all Users</button>
+                        <div id="allUsersOutput" style="margin-top: 10px;"></div>
+                    </div>
+                    
+                    <div class="box"  id="allUsersDiv" style="display: none;">
+                        <label>List of Users</label>
+                        <div class="scrollableDiv">
+                            <ul class="list-group" id="allUsersDataList"></ul>
+                            <div class="templates">
+                                <div id="allUsersListItem">
+                                    <div class="row1">
+                                        <div class="listAllUsersId"></div>
+                                        <div class="listAllUsersFirstName"></div>
+                                        <div class="listAllUsersLastName"></div>
+                                        <div class="listAllUsersEmail"></div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="box">
+                        <div class="form-group">
+                            <label>Zip:</label>
+                            <input type="number" value="100" id="zipInput" class="form-control" min="99" max="9998">
+                        </div>
+                        <button id="getZip" class="btn btn-default">Get By Zip Code</button>
+                        <button style="float: right;" id="getAllZip" class="btn btn-default">Get All Zip Codes</button>
+                        <div id="zipInfoOutput" style="margin-top: 10px;"></div>
+                    </div>
+
+                    <div class="box"  id="allZipCodeDiv" style="display: none;">
+                        <label>List of Zips</label>
+                        <div class="scrollableDiv">
+                            <ul class="list-group" id="zipDataList"></ul>
+                            <div class="templates">
+                                <div id="zipListItem">
+                                    <div class="row1">
+                                        <div class="listZipCode"><!-- The Zip codes goes here --></div>
+                                        <div class="listZipCity"><!-- The City goes here --></div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                    <div class="box">
+                        <label>List of PhoneNumbers</label><br>
+                        <button id="getAllPhoneNumbs" class="btn btn-default">Get All Phone Numbers</button>
+                    </div>
+                    <div class="box" id="allPhoneNumDiv" style="display: none;">
+                        <div class="scrollableDiv">
+                            <ul class="list-group" id="phoneDataList"></ul>
+                            <div class="templates">
+                                <div id="phoneListItem">
+                                    <div class="row1">
+                                        <div class="listPhoneNumber"><!-- The Zip codes goes here --></div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="scripts/getFromAPI.js" type="text/javascript"></script>
 </html>
