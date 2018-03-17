@@ -54,6 +54,11 @@ public class PersonFacade {
         return null;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 701778fe678492ccd564974b101e9ea33002f7c5
     public static int getNumberOfPersonWithHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
         // First we get the hobby_id from the hobby name : 
@@ -109,7 +114,13 @@ public class PersonFacade {
         q.executeUpdate();
         em.getTransaction().commit();
         em.close();
+<<<<<<< HEAD
         return "Person has been removed from the database: " + deleted.getFirstName() + " " + deleted.getLastName() + " using ID: " + deleted.getId();
     }
 
+=======
+        return "Person has been removed from the database: " + deleted.getFirstName()+" "+deleted.getLastName()+ " using ID: " + deleted.getId();
+    }
+    
+>>>>>>> 701778fe678492ccd564974b101e9ea33002f7c5
 }
