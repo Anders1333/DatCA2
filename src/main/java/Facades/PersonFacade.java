@@ -5,13 +5,13 @@
  */
 package Facades;
 
-import DataTransferObjects.PersonDTO;
 import Entities.Person;
-import java.util.ArrayList;
+import ErrorHandling.PersonNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 /**
@@ -22,13 +22,21 @@ public class PersonFacade {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DataCA2PU");
 
-    public static Person getPersonFromId(int id) {
+    public static Person getPersonFromId(int id) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Person.findById");
-        q.setParameter("id", id);
-        Person p = (Person) q.getSingleResult();
-       
-        return p;
+        try {
+            Query q = em.createNamedQuery("Person.findById");
+            q.setParameter("id", id);
+            Person p = (Person) q.getSingleResult();
+            return p;
+
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Person not found");
+
+        } finally {
+            em.close();
+        }
+
     }
 
     public static List<Person> getAllPersons() {
@@ -39,6 +47,7 @@ public class PersonFacade {
 
     public static Person getPersonFromPhone(int phonenumber) {
         EntityManager em = emf.createEntityManager();
+        
         Query q = em.createQuery("SELECT p.Person_id FROM Phone p WHERE p.number = : phonenumber");
         q.setParameter("phonenumber", phonenumber);
         int personId = (Integer) q.getSingleResult();
@@ -65,11 +74,9 @@ public class PersonFacade {
 //        }
 //        return returnList;
 //    }
-
     public static void createPerson(Person p) {
         EntityManager em = emf.createEntityManager();
-        
-       
+
     }
 
     public static int getNumberOfPersonWithHobby(String hobby) {
@@ -100,16 +107,16 @@ public class PersonFacade {
     }
 
     public static List<Person> getPersonsFromHobby(String hobbyName) {
-     
+
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT h.hobbyId FROM Hobby h WHERE h.hobbyName =:hobbyName");
         q.setParameter("hobbyName", hobbyName);
         int hobbyId = (Integer) q.getSingleResult();
-      
+
         Query x = em.createQuery("SELECT p FROM Person p LEFT JOIN p.hobbyList g WHERE g.hobbyId =:hobbyId");
         x.setParameter("hobbyId", hobbyId);
         List<Person> returnList = x.getResultList();
         return returnList;
     }
-    
+
 }

@@ -16,6 +16,7 @@ import Entities.CityInfo;
 import Entities.Hobby;
 import Entities.Person;
 import Entities.Phone;
+import ErrorHandling.PersonNotFoundException;
 import Facades.AddressFacade;
 import Facades.CityInfoFacade;
 import Facades.HobbyFacade;
@@ -69,17 +70,18 @@ public class DatCA2Resource {
         for (int i = 0; i < persons.size(); i++) {
             messages.add(new PersonDTO(persons.get(i)));
         }
+
         return gson.toJson(messages);
     }
 
     @Path("persons/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonFromId(@PathParam("id") Integer id) {
-
+    public String getPersonFromId(@PathParam("id") Integer id) throws PersonNotFoundException {
         Person p = PersonFacade.getPersonFromId(id);
         PersonDTO pd = new PersonDTO(p);
         return gson.toJson(pd);
+
     }
 
     @Path("cities")
@@ -91,18 +93,19 @@ public class DatCA2Resource {
 
         for (int i = 0; i < citys.size(); i++) {
             messages.add(new CityInfoDTO(citys.get(i)));
+
         }
         return gson.toJson(messages);
-
     }
 
     @Path("cities/{zip}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCityFromZip(@PathParam("zip") Integer zipCode) {
+    public String getCityFromZip(@PathParam("zip") Integer zipCode) throws PersonNotFoundException {
         CityInfo city = CityInfoFacade.getCityFromZip(zipCode);
         CityInfoDTO cityData = new CityInfoDTO(city);
         return gson.toJson(cityData);
+
     }
 
     @Path("phonenumbers")
@@ -115,66 +118,67 @@ public class DatCA2Resource {
         for (int i = 0; i < phones.size(); i++) {
             messages.add(new PhoneDTO(phones.get(i)));
         }
+
         return gson.toJson(messages);
 
     }
-    
-    
+
     @Path("addresses")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllAddresses(){
-       List<Address> addresses = AddressFacade.getAllAddress();
-       ArrayList<JsonMessage> messages = new ArrayList<>();
-       
+    public String getAllAddresses() {
+        List<Address> addresses = AddressFacade.getAllAddress();
+        ArrayList<JsonMessage> messages = new ArrayList<>();
+
         for (int i = 0; i < addresses.size(); i++) {
-            messages.add(new AddressDTO(addresses.get(i),addresses.get(i).getZipCode()));
+            messages.add(new AddressDTO(addresses.get(i), addresses.get(i).getZipCode()));
         }
+
         return gson.toJson(messages);
     }
 
     @Path("persons/whoLivesIn/{cityName}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonsFromZip (@PathParam("cityName") String city) {
+    public String getPersonsFromZip(@PathParam("cityName") String city) {
+
         List<Person> persons = PersonFacade.getPersonsFromCity(city);
         ArrayList<JsonMessage> messages = new ArrayList<>();
-           for (int i = 0; i < persons.size(); i++) {
+        for (int i = 0; i < persons.size(); i++) {
             messages.add(new PersonDTO(persons.get(i)));
         }
+
         return gson.toJson(messages);
+
     }
-    
+
     @Path("hobbies")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllHobbies(){
+    public String getAllHobbies() {
         List<Hobby> hobbies = HobbyFacade.getAllHobbies();
         ArrayList<JsonMessage> messages = new ArrayList<>();
         for (int i = 0; i < hobbies.size(); i++) {
             messages.add(new HobbyDTO(hobbies.get(i)));
         }
+
         return gson.toJson(messages);
     }
-   
+
     @Path("hobbies/{hobbyName}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonsFromHobby (@PathParam("hobbyName") String hobbyName) {
+    public String getPersonsFromHobby(@PathParam("hobbyName") String hobbyName) {
         List<Person> persons = PersonFacade.getPersonsFromHobby(hobbyName);
         ArrayList<JsonMessage> messages = new ArrayList<>();
-           for (int i = 0; i < persons.size(); i++) {
+        for (int i = 0; i < persons.size(); i++) {
             messages.add(new PersonDTO(persons.get(i)));
         }
+
         return gson.toJson(messages);
     }
-    
-    
-   //------------------------------- GET END ----------------------------------//
-    
-    
-    
-    
+
+    //------------------------------- GET END ----------------------------------//
     /**
      * PUT method for updating or creating an instance of DatCA2Resource
      *
