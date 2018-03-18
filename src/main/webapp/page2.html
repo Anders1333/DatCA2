@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <!-- NavBar START -->
+        <nav class="navbar navbar-inverse" style="border-radius: 0px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">The Bois</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="page1.html">PAGE 1</a></li>
+                    <li class="active"><a href="page2.html">CREATE USER</a></li>
+                    <li><a href="page3.html">PAGE</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NavBar END -->
+
+
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-sm-4">
+                </div>
+                
+                
+                <div class="col-sm-4"> <!-- Left Col -->
+                    <div class="box">
+                        <div class="form-group">
+                            <label>Create User - Fill in everthing.</label>
+                            <input type="text" id="firstNameInput" class="form-control" placeholder="First Name"><br>
+                            <input type="text" id="lastNameInput" class="form-control" placeholder="Last Name"><br>
+                            <input type="email" id="emailInput" class="form-control" placeholder="Email Name"><br>
+                            <input type="number" id="zipCodeInput" class="form-control" placeholder="Zip Code"><br>
+                            <input type="text" id="cityNameInput" class="form-control" placeholder="City Name"><br>
+                            <input type="text" id="streetNameInput" class="form-control" placeholder="Street Name"><br>
+                            <input type="number" id="streetNumberInput" class="form-control" placeholder="Street Number"><br>
+                            <input type="number" id="floorNumberInput" class="form-control" placeholder="Floor Number">                            
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <input type="number" id="phoneNumberInput" class="form-control" placeholder="Add phone number"><br>  
+                        <button id="addPhoneNumber" class="btn btn-default">Add Phonenumber</button>
+                    </div>
+
+                    <div class="box">
+                        <select class="form-control" id="hobbySelector">
+                            <option value="7">Surfing</option>
+                            <option value="8">Dancing</option>
+                            <option value="9">Painting</option>
+                            <option value="10">Climbing</option>
+                            <option value="11">Tennis</option>
+                            <option value="12">Hacking</option>
+                            <option value="13">Building Sandcastles in the sand</option>
+                        </select>
+                        <br>
+                        <button id="addHobbyButton" class="btn btn-default">Add Hobby</button>
+                    </div>
+
+
+                    <div class="box">
+                        <button id="createUser" class="btn btn-default">Create User</button>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="scripts/createUserScript.js" type="text/javascript"></script>
+</html>

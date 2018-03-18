@@ -1,4 +1,4 @@
-document.getElementById("getUser").onclick = getUserByID;
+    document.getElementById("getUser").onclick = getUserByID;
 document.getElementById("deleteUser").onclick = deleteUserById;
 document.getElementById("getZip").onclick = getCityByZipCode;
 document.getElementById("getAllZip").onclick = getAllZipCodes;
